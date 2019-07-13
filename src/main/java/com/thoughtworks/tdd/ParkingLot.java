@@ -1,34 +1,35 @@
 package com.thoughtworks.tdd;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ParkingLot {
 
-//    private List<Car> cars = new ArrayList<>();
-//    private int maxCapacity;
+    private static Map<Car,Ticket> cars = new HashMap();
+//    private static int maxCapacity = 10;
 //    private static int capacity;
 //
-//    public ParkingLot(int maxCapacity) {
-//        this.maxCapacity = maxCapacity;
-//    }
 //
 //    public int getCapacity() {
 //        return capacity;
 //    }
 //
-//    public void setCapacity(int maxCapacity) {
+//    public static void setCapacity() {
 //        if(capacity<maxCapacity){
 //            capacity++;
 //        }else{
-//
+//            System.out.println("full");
 //        }
 //
 //    }
-//
-//    public void addCar(Car car) {
-//        cars.add(car);
-//    }
 
+    public static void addCar(Car car,Ticket ticket) {
+        cars.put(car,ticket);
+    }
 
+    public static Map<Car, Ticket> getCars() {
+        return cars;
+    }
 }

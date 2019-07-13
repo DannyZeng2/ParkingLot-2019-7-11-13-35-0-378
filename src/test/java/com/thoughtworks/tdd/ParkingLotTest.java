@@ -11,9 +11,9 @@ import static org.mockito.Mockito.when;
 public class ParkingLotTest {
 
     @Test
-    public void should_park_a_car_and_get_a_ticket() {
+    public void should_park_a_car_return_get_a_ticket() {
         //Given
-        Car car  = new Car();
+        Car car  = new Car("111","丰田","white");
         ParkingBoy parkingBoy = new ParkingBoy();
         //When
         Ticket ticket = parkingBoy.parkCar(car);
@@ -22,14 +22,35 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_give_a_ticket_and_get_a_car() {
+    public void should_get_a_ticket_and_return_a_car() {
         //Given
-        Ticket ticket = new Ticket();
+        Ticket ticket = new Ticket(new Car("111","丰田","white"));
         ParkingBoy parkingBoy = new ParkingBoy();
         //When
         Car car = parkingBoy.returnCar(ticket);
         //Then
         Assertions.assertNotNull(car);
+    }
+
+    @Test
+    public void should_return_cars_with_correspond_ticket() {
+        //Given
+        Car car1  = new Car("111","丰田","white");
+        Car car2  = new Car("222","本田","black");
+
+        Ticket ticket1 = new Ticket(car1);
+        Ticket ticket2 = new Ticket(car2);
+
+        //When
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.addCar(car1,ticket1);
+        parkingLot.addCar(car2,ticket2);
+
+        //Then
+        Assertions.assertEquals(car1,parkingBoy.returnCar(ticket1));
+        Assertions.assertEquals(car2,parkingBoy.returnCar(ticket2));
+
     }
 
 }
