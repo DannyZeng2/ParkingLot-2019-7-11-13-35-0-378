@@ -5,25 +5,26 @@ import java.util.Map;
 public class ParkingBoy {
 
 
+
+
     public Ticket parkCar(Car car){
         return new Ticket(car);
     }
 
-    public Car returnCar(Ticket ticket) {
-
-        Map<Car, Ticket> cars = ParkingLot.getCars();
+    public Car returnCar(Ticket ticket,ParkingLot parkingLot) {
+        Map<Car, Ticket> cars = parkingLot.getCars();
         if(ticket == null){
-            ParkingLot.setMessage("Please provide your parking ticket.");
+            parkingLot.setMessage("Please provide your parking ticket.");
             return null;
         }
 
         for (Car car : cars.keySet()) {
             if(ticket==cars.get(car)){
-                ParkingLot.removeCar(car,ticket);
+                parkingLot.removeCar(car,ticket);
                 return car;
             }
         }
-        ParkingLot.setMessage("Unrecognized parking ticket.");
+        parkingLot.setMessage("Unrecognized parking ticket.");
         return null;
     }
 }

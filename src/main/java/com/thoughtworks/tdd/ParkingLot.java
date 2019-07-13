@@ -7,15 +7,15 @@ import java.util.Map;
 
 public class ParkingLot {
 
-    private static Map<Car,Ticket> cars = new HashMap();
-    private static int maxCapacity = 2;
-    private static String Message;
+    private Map<Car,Ticket> cars = new HashMap();
+    private int maxCapacity = 2;
+    private String Message;
 
-    public static String getMessage() {
+    public String getMessage() {
         return Message;
     }
 
-    public static void setMessage(String message) {
+    public void setMessage(String message) {
         Message = message;
     }
 
@@ -29,11 +29,11 @@ public class ParkingLot {
         }
     }
 
-    public static void removeCar(Car car,Ticket ticket) {
+    public void removeCar(Car car,Ticket ticket) {
         cars.remove(car,ticket);
     }
 
-    public static Map<Car, Ticket> getCars() {
+    public Map<Car, Ticket> getCars() {
         return cars;
     }
 }
