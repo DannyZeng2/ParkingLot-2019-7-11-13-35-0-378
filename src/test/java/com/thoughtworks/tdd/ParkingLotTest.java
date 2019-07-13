@@ -2,11 +2,6 @@ package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.*;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 
 public class ParkingLotTest {
 
@@ -113,13 +108,47 @@ public class ParkingLotTest {
         //When
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.addCar(car1,ticket1);
-
+        parkingLot.addCar(car2,ticket2);
+        parkingLot.addCar(car3,ticket3);
 
         //Then
-        Assertions.assertEquals( "The capacity is not full",parkingLot.addCar(car2,ticket2));
-        Assertions.assertEquals( "The capacity is full,you can't park here",parkingLot.addCar(car3,ticket3));
+        Assertions.assertEquals( "Not enough position.",parkingLot.getMessage());
 
 
+    }
+    @Test
+    public void should_sent_massage_when_sent_wrong_ticket() {
+        //Given
+        Car car1  = new Car("111","丰田","white");
+
+        Ticket ticket1 = new Ticket(car1);
+        Ticket wrongTicket = new Ticket(new Car());
+
+        //When
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.addCar(car1,ticket1);
+        parkingBoy.returnCar(wrongTicket);
+
+        //Then
+        Assertions.assertEquals("Unrecognized parking ticket.",parkingLot.getMessage()); // wrong ticket
+    }
+
+    @Test
+    public void should_sent_massage_when_not_provide_ticket() {
+        //Given
+        Car car1  = new Car("111","丰田","white");
+        Ticket ticket1 = new Ticket(car1);
+
+        //When
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.addCar(car1,ticket1);
+
+        parkingBoy.returnCar(null);
+
+        //Then
+        Assertions.assertEquals("Please provide your parking ticket.",parkingLot.getMessage()); // no ticket
     }
 
 }

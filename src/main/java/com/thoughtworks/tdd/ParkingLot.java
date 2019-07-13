@@ -9,13 +9,23 @@ public class ParkingLot {
 
     private static Map<Car,Ticket> cars = new HashMap();
     private static int maxCapacity = 2;
+    private static String Message;
 
-    public static String addCar(Car car,Ticket ticket) {
+    public static String getMessage() {
+        return Message;
+    }
+
+    public static void setMessage(String message) {
+        Message = message;
+    }
+
+
+
+    public void addCar(Car car,Ticket ticket) {
         if(cars.size()<maxCapacity) {
             cars.put(car, ticket);
-            return  "The capacity is not full";
         }else {
-            return  "The capacity is full,you can't park here";
+            setMessage("Not enough position.");
         }
     }
 
