@@ -53,4 +53,23 @@ public class ParkingLotTest {
 
     }
 
+    @Test
+    public void should_not_return_cars_with_wrong_or_no_ticket() {
+        //Given
+        Car car1  = new Car("111","丰田","white");
+
+        Ticket ticket1 = new Ticket(car1);
+        Ticket wrongTicket = new Ticket(new Car());
+
+        //When
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.addCar(car1,ticket1);
+
+        //Then
+        Assertions.assertEquals(null,parkingBoy.returnCar(wrongTicket)); // wrong ticket
+        Assertions.assertEquals(null,parkingBoy.returnCar(null)); // no ticket
+
+    }
+
 }

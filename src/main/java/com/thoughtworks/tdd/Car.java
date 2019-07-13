@@ -6,8 +6,8 @@ public class Car {
     private String color;
     private Ticket ticket;
 
-    public Car(Ticket ticket) {
-        this.ticket = ticket;
+    public Car() {
+
     }
 
     public Car(String id, String brand, String color) {
