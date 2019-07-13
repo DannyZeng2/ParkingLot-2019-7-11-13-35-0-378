@@ -24,12 +24,15 @@ public class ParkingLotTest {
     @Test
     public void should_get_a_ticket_and_return_a_car() {
         //Given
-        Ticket ticket = new Ticket(new Car("111","丰田","white"));
+        Car car = new Car("111", "丰田", "white");
+        Ticket ticket = new Ticket(car);
         ParkingBoy parkingBoy = new ParkingBoy();
         //When
-        Car car = parkingBoy.returnCar(ticket);
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.addCar(car,ticket);
+
         //Then
-        Assertions.assertNotNull(car);
+        Assertions.assertNotNull(parkingBoy.returnCar(ticket));
     }
 
     @Test
@@ -89,10 +92,33 @@ public class ParkingLotTest {
 
         Car returnCar1 = parkingBoy.returnCar(ticket1); //ticket1 has been used!!!
         Car returnCar2 = parkingBoy.returnCar(ticket1);
-        
+
         //Then
         Assertions.assertEquals(car1,returnCar1);
         Assertions.assertEquals(null,returnCar2);
+
+    }
+
+    @Test
+    public void should_not_park_cars_if_capacity_is_full() {
+        //Given
+        Car car1  = new Car("111","丰田","white");
+        Car car2  = new Car("222","本田","black");
+        Car car3  = new Car("333","宝马","blue");
+
+        Ticket ticket1 = new Ticket(car1);
+        Ticket ticket2 = new Ticket(car2);
+        Ticket ticket3 = new Ticket(car3);
+
+        //When
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.addCar(car1,ticket1);
+
+
+        //Then
+        Assertions.assertEquals( "The capacity is not full",parkingLot.addCar(car2,ticket2));
+        Assertions.assertEquals( "The capacity is full,you can't park here",parkingLot.addCar(car3,ticket3));
+
 
     }
 

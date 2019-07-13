@@ -8,25 +8,15 @@ import java.util.Map;
 public class ParkingLot {
 
     private static Map<Car,Ticket> cars = new HashMap();
-//    private static int maxCapacity = 10;
-//    private static int capacity;
-//
-//
-//    public int getCapacity() {
-//        return capacity;
-//    }
-//
-//    public static void setCapacity() {
-//        if(capacity<maxCapacity){
-//            capacity++;
-//        }else{
-//            System.out.println("full");
-//        }
-//
-//    }
+    private static int maxCapacity = 2;
 
-    public static void addCar(Car car,Ticket ticket) {
-        cars.put(car,ticket);
+    public static String addCar(Car car,Ticket ticket) {
+        if(cars.size()<maxCapacity) {
+            cars.put(car, ticket);
+            return  "The capacity is not full";
+        }else {
+            return  "The capacity is full,you can't park here";
+        }
     }
 
     public static void removeCar(Car car,Ticket ticket) {

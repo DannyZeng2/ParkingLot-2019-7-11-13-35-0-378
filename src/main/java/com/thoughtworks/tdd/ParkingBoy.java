@@ -16,7 +16,7 @@ public class ParkingBoy {
         for (Car car : cars.keySet()) {
             if(ticket==cars.get(car)){
                 ParkingLot.removeCar(car,ticket);
-                return  car;
+                return car;
 
             }
         }
