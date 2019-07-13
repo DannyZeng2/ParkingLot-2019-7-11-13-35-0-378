@@ -151,4 +151,22 @@ public class ParkingLotTest {
         Assertions.assertEquals("Please provide your parking ticket.",parkingLot.getMessage()); // no ticket
     }
 
+//    @Test
+//    public void should_park_car_to_second_position_when_first_parking_lot is full() {
+//        //Given
+//        Car car1  = new Car("111","丰田","white");
+//        Ticket ticket1 = new Ticket(car1);
+//
+//        //When
+//        ParkingBoy parkingBoy = new ParkingBoy();
+//        ParkingLot parkingLot1 = new ParkingLot();
+//        ParkingLot parkingLot2 = new ParkingLot();
+//        parkingLot.addCar(car1,ticket1);
+//
+//        parkingBoy.returnCar(null,parkingLot);
+//
+//        //Then
+//        Assertions.assertEquals("Please provide your parking ticket.",parkingLot.getMessage()); // no ticket
+//    }
+
 }

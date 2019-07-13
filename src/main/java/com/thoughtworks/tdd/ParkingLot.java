@@ -22,8 +22,9 @@ public class ParkingLot {
 
 
     public void addCar(Car car,Ticket ticket) {
+
         if(cars.size()<maxCapacity) {
-            cars.put(car, ticket);
+            cars.put(car,ticket);
         }else {
             setMessage("Not enough position.");
         }
