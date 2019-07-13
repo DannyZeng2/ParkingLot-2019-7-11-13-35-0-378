@@ -29,6 +29,10 @@ public class ParkingLot {
         cars.put(car,ticket);
     }
 
+    public static void removeCar(Car car,Ticket ticket) {
+        cars.remove(car,ticket);
+    }
+
     public static Map<Car, Ticket> getCars() {
         return cars;
     }

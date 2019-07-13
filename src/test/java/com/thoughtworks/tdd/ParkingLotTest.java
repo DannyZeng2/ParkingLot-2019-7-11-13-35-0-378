@@ -72,4 +72,28 @@ public class ParkingLotTest {
 
     }
 
+    @Test
+    public void should_not_return_cars_if_ticket_used() {
+        //Given
+        Car car1  = new Car("111","丰田","white");
+        Car car2  = new Car("222","本田","black");
+
+        Ticket ticket1 = new Ticket(car1);
+        Ticket ticket2 = new Ticket(car2);
+
+        //When
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.addCar(car1,ticket1);
+        parkingLot.addCar(car2,ticket2);
+
+        Car returnCar1 = parkingBoy.returnCar(ticket1); //ticket1 has been used!!!
+        Car returnCar2 = parkingBoy.returnCar(ticket1);
+        
+        //Then
+        Assertions.assertEquals(car1,returnCar1);
+        Assertions.assertEquals(null,returnCar2);
+
+    }
+
 }
