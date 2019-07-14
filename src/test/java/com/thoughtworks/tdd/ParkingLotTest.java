@@ -215,6 +215,59 @@ public class ParkingLotTest {
         parkingBoy.parkCarInlargerRate(car4,parkingLot1,parkingLot2);
 
         //Then
-        Assertions.assertEquals(3,parkingLot2.getCars().size()); // no ticket
+        Assertions.assertEquals(3,parkingLot2.getCars().size());
+    }
+
+    @Test
+    public void add_parking_boys_to_management_list() {  //预估：8min 实际：10min
+        //Given
+        Car car1 = new Car("111", "丰田", "white");
+        Car car2 = new Car("222", "本田", "black");
+
+        ParkingLot parkingLot = new ParkingLot(2);
+
+        ParkingBoy parkingBoy1 = new ParkingBoy();
+        ParkingBoy parkingBoy2 = new ParkingBoy();
+
+        parkingLot.setParkingBoylist(parkingBoy1);
+        parkingLot.setParkingBoylist(parkingBoy2);
+
+        //When
+        Ticket ticket1 = parkingBoy1.parkCar(car1, parkingLot);
+        Ticket ticket2 = parkingBoy2.parkCar(car2, parkingLot);
+
+        Car returnCar1 = parkingBoy1.returnCar(ticket1, parkingLot); //ticket1 has been used!!!
+        Car returnCar2 = parkingBoy2.returnCar(ticket2, parkingLot);
+
+        //Then
+        Assertions.assertEquals(car1, returnCar1);
+        Assertions.assertEquals(car2, returnCar2);
+    }
+
+    @Test
+    public void add_manager_to_parking_lot() {  //预估：8min 实际：10min
+        //Given
+        Car car1 = new Car("111", "丰田", "white");
+        Car car2 = new Car("222", "奥迪", "black");
+        Car car3 = new Car("333", "宝马", "red");
+
+        Manager manager1 = new Manager("danny");
+        Manager manager2 = new Manager("leo");
+
+
+        ParkingLot parkingLot1 = new ParkingLot(manager1,2);
+        ParkingLot parkingLot2 = new ParkingLot(manager2,2);
+
+        //When
+        Ticket ticket1 = manager1.parkCar(car1, parkingLot1);
+        Ticket ticket2 = manager1.parkCar(car2, parkingLot1);
+        Ticket ticket3 = manager2.parkCar(car3, parkingLot2);
+
+        Car returnCar1 = manager1.returnCar(ticket1, parkingLot1); //ticket1 has been used!!!
+        Car returnCar2 = manager2.returnCar(ticket3, parkingLot2);
+
+        //Then
+        Assertions.assertEquals(car1, returnCar1);
+        Assertions.assertEquals(car3, returnCar2);
     }
 }
