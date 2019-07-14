@@ -8,6 +8,7 @@ public class Car {
 
     public Car() {
 
+
     }
 
     public Car(String id, String brand, String color) {
