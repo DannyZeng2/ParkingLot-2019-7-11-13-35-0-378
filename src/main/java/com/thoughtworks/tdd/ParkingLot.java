@@ -11,6 +11,14 @@ public class ParkingLot {
     private int maxCapacity = 2;
     private String Message;
 
+    public ParkingLot(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
     public String getMessage() {
         return Message;
     }
@@ -19,11 +27,9 @@ public class ParkingLot {
         Message = message;
     }
 
-
-
     public void addCar(Car car,Ticket ticket) {
 
-        if(cars.size()<maxCapacity) {
+        if(cars.size()<this.maxCapacity) {
             cars.put(car,ticket);
         }else {
             setMessage("Not enough position.");
