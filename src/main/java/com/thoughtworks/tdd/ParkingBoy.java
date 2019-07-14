@@ -13,12 +13,23 @@ public class ParkingBoy {
         return ticket;
     }
 
-    public Ticket parkCar(Car car,ParkingLot parkingLot1,ParkingLot parkingLot2){
+    public Ticket parkCarStupid(Car car,ParkingLot parkingLot1,ParkingLot parkingLot2){
         Ticket ticket = new Ticket(car);
         if(parkingLot1.getCars().size()==2){
             parkingLot2.addCar(car,ticket);
-        }else{
+        }else {
             parkingLot1.addCar(car,ticket);
+        }
+
+        return ticket;
+    }
+
+    public Ticket parkCarClever(Car car,ParkingLot parkingLot1,ParkingLot parkingLot2){
+        Ticket ticket = new Ticket(car);
+        if(parkingLot1.getCars().size()<parkingLot2.getCars().size()&&parkingLot1.getCars().size()!=2){
+            parkingLot1.addCar(car,ticket);
+        }else{
+            parkingLot2.addCar(car,ticket);
         }
 
         return ticket;
