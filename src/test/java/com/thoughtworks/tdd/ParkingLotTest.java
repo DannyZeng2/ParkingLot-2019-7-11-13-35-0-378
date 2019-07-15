@@ -2,25 +2,18 @@ package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ParkingLotTest {
 
-    @Test
-    public void should_park_a_car_return_get_a_ticket() {  //预估：5min 实际：6min
-        //Given
-        Car car  = new Car("111","丰田","white");
-        ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot(2);
-        //When
-        Ticket ticket = parkingBoy.parkCar(car,parkingLot);
-        //Then
-        Assertions.assertNotNull(ticket);
-    }
+
 
     @Test
     public void should_get_a_ticket_and_return_a_car() { //预估：5min 实际：5min
         //Given
-        Car car = new Car("111", "丰田", "white");
+        Car car = new Car();
         Ticket ticket = new Ticket(car);
         ParkingBoy parkingBoy = new ParkingBoy();
         //When
@@ -34,8 +27,8 @@ public class ParkingLotTest {
     @Test
     public void should_return_cars_with_correspond_ticket() { //预估：10min 实际：10min
         //Given
-        Car car1  = new Car("111","丰田","white");
-        Car car2  = new Car("222","本田","black");
+        Car car1  = new Car();
+        Car car2  = new Car();
 
         Ticket ticket1 = new Ticket(car1);
         Ticket ticket2 = new Ticket(car2);
@@ -55,10 +48,10 @@ public class ParkingLotTest {
     @Test
     public void should_not_return_cars_with_wrong_or_no_ticket() { //预估：5min 实际：5min
         //Given
-        Car car1  = new Car("111","丰田","white");
+        Car car1  = new Car();
 
         Ticket ticket1 = new Ticket(car1);
-        Ticket wrongTicket = new Ticket(new Car("222","本田","white"));
+        Ticket wrongTicket = new Ticket(new Car());
 
         //When
         ParkingBoy parkingBoy = new ParkingBoy();
@@ -74,8 +67,8 @@ public class ParkingLotTest {
     @Test
     public void should_not_return_cars_if_ticket_used() {  //预估：8min 实际：10min
         //Given
-        Car car1  = new Car("111","丰田","white");
-        Car car2  = new Car("222","本田","black");
+        Car car1  = new Car();
+        Car car2  = new Car();
 
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = new ParkingLot(2);
@@ -99,9 +92,9 @@ public class ParkingLotTest {
     @Test
     public void should_not_park_cars_if_capacity_is_full() {  //预估：8min 实际：12min
         //Given
-        Car car1  = new Car("111","丰田","white");
-        Car car2  = new Car("222","本田","black");
-        Car car3  = new Car("333","宝马","blue");
+        Car car1  = new Car();
+        Car car2  = new Car();
+        Car car3  = new Car();
 
         Ticket ticket1 = new Ticket(car1);
         Ticket ticket2 = new Ticket(car2);
@@ -122,11 +115,11 @@ public class ParkingLotTest {
     @Test
     public void should_sent_massage_when_sent_wrong_ticket() { //预估：10min 实际：10min
         //Given
-        Car car  = new Car("111","丰田","white");
+        Car car  = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = new ParkingLot(2);
 
-        Ticket wrongTicket = new Ticket(new Car("222","本田","white"));
+        Ticket wrongTicket = new Ticket(new Car());
 
         //When
         parkingBoy.parkCar(car,parkingLot);
@@ -139,7 +132,7 @@ public class ParkingLotTest {
     @Test
     public void should_sent_massage_when_not_provide_ticket() {  //预估：5min 实际：5min
         //Given
-        Car car  = new Car("111","丰田","white");
+        Car car  = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = new ParkingLot(2);
 
@@ -154,75 +147,12 @@ public class ParkingLotTest {
     }
 
 
-    @Test
-    public void should_park_car_to_second_position_when_first_parking_lot_is_full() { //预估：20min 实际：30min
-        //Given
-        Car car1  = new Car("111","丰田","white");
-        Car car2  = new Car("222","本田","black");
-        Car car3  = new Car("333","宝马","blue");
-
-        ParkingBoy parkingBoy = new ParkingBoy();
-
-        ParkingLot parkingLot1 = new ParkingLot(2);
-        ParkingLot parkingLot2 = new ParkingLot(2);
-
-        //When
-        parkingBoy.parkCarStupid(car1,parkingLot1,parkingLot2);
-        parkingBoy.parkCarStupid(car2,parkingLot1,parkingLot2);
-        parkingBoy.parkCarStupid(car3,parkingLot1,parkingLot2);
-
-        //Then
-        Assertions.assertEquals(1,parkingLot2.getCars().size()); // no ticket
-    }
-
-    @Test
-    public void should_park_car_to_position_has_more_lot() { //预估：5min 实际：5min
-        //Given
-        Car car1  = new Car("111","丰田","white");
-        Car car2  = new Car("222","本田","black");
-        Car car3  = new Car("333","宝马","blue");
-
-        ParkingBoy parkingBoy = new ParkingBoy();
-
-        ParkingLot parkingLot1 = new ParkingLot(2);
-        ParkingLot parkingLot2 = new ParkingLot(2);
-
-        //When
-        parkingBoy.parkCarClever(car1,parkingLot1,parkingLot2);
-        parkingBoy.parkCarClever(car2,parkingLot1,parkingLot2);
-
-        //Then
-        Assertions.assertEquals(1,parkingLot2.getCars().size()); // no ticket
-    }
-
-    @Test
-    public void should_park_car_to_position_has_larger_available_position_rate () { //预估：8min 实际：15min
-        //Given
-        Car car1  = new Car("111","丰田","white");
-        Car car2  = new Car("222","本田","black");
-        Car car3  = new Car("333","宝马","blue");
-        Car car4  = new Car("444","奧迪","red");
-
-        ParkingBoy parkingBoy = new ParkingBoy();
-
-        ParkingLot parkingLot1 = new ParkingLot(2);
-        ParkingLot parkingLot2 = new ParkingLot(5);
-
-        //When
-        parkingBoy.parkCarInlargerRate(car1,parkingLot1,parkingLot2);
-        parkingBoy.parkCarInlargerRate(car2,parkingLot1,parkingLot2);
-        parkingBoy.parkCarInlargerRate(car3,parkingLot1,parkingLot2);
-        parkingBoy.parkCarInlargerRate(car4,parkingLot1,parkingLot2);
-
-        //Then
-        Assertions.assertEquals(3,parkingLot2.getCars().size());
-    }
 
     @Test
     public void add_parking_boys_to_management_list() {  //预估：8min 实际：10min
         //Given
-        Car car1 = new Car("111", "丰田", "white");
-        Car car2 = new Car("222", "本田", "black");
+        Car car1 = new Car();
+        Car car2 = new Car();
 
         ParkingLot parkingLot = new ParkingLot(2);
 
@@ -247,9 +177,9 @@ public class ParkingLotTest {
     @Test
     public void add_manager_to_parking_lot() {  //预估：8min 实际：10min
         //Given
-        Car car1 = new Car("111", "丰田", "white");
-        Car car2 = new Car("222", "奥迪", "black");
-        Car car3 = new Car("333", "宝马", "red");
+        Car car1 = new Car();
+        Car car2 = new Car();
+        Car car3 = new Car();
 
         Manager manager1 = new Manager("danny");
         Manager manager2 = new Manager("leo");
